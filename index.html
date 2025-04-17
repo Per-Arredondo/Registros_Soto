@@ -2,61 +2,55 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Control de Pacientes – Dra. Karla Soto</title>
-  <!-- Bootstrap + FontAwesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Pacientes - Dra. Karla Soto</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body { background: #f5f7fa; color: #333; padding: 20px; }
-    .card { box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: none; margin-bottom: 30px; }
-    .card-header { background: #007bff; color: #fff; font-size:1.3rem; }
-    .form-control, .btn { border-radius: 20px; }
-    .btn { padding: .6rem 1.2rem; }
-    #otroProcedimiento, #otroClinica, #otroAnestesiologo, #otroCirujano { display:none; }
-    canvas { margin-top: 1rem; }
+    body { background-color: #f7fafd; color: #333; font-family: 'Segoe UI', sans-serif; }
+    .card { margin-bottom: 1.5rem; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    .card-header { background-color: #1976d2; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px; }
+    .form-select option[disabled][selected] { color: #999; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
-
-<div class="container">
-
-  <!-- FORMULARIO -->
+<div class="container py-4">
   <div class="card">
-    <div class="card-header text-center">Registro de Pacientes</div>
+    <div class="card-header text-center">
+      <h4>Formulario de Registro de Pacientes - Dra. Karla Soto</h4>
+    </div>
     <div class="card-body">
       <form id="patientForm">
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label>Fecha registro</label>
-            <input type="text" id="fecha" class="form-control" disabled>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label>Fecha</label>
+            <input type="text" id="fecha" class="form-control" readonly>
           </div>
-          <div class="form-group col-md-3">
+          <div class="col-md-3">
             <label>Folio</label>
-            <input type="text" id="folio" class="form-control" disabled>
+            <input type="text" id="folio" class="form-control" readonly>
           </div>
-          <div class="form-group col-md-6">
+          <div class="col-md-6">
             <label>Fecha del Procedimiento</label>
             <input type="date" id="fechaProcedimiento" class="form-control" required>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="col-md-6">
             <label>Nombre del Paciente</label>
             <input type="text" id="nombrePaciente" class="form-control" required>
           </div>
-          <div class="form-group col-md-3">
-            <label>Sexo</label>
-            <select id="sexoPaciente" class="form-control" required>
-              <option>Masculino</option>
-              <option>Femenino</option>
+          <div class="col-md-6">
+            <label>Sexo del Paciente</label>
+            <select id="sexoPaciente" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
+              <option>Mujer</option>
+              <option>Hombre</option>
             </select>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="col-md-6">
             <label>Procedimiento</label>
-            <select id="procedimiento" class="form-control" required>
+            <select id="procedimiento" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Apendicectomía</option>
               <option>Blefaroplastia</option>
               <option>Cerclaje Cervical</option>
@@ -71,56 +65,47 @@
               <option>RTUP</option>
               <option>Otro</option>
             </select>
+            <input type="text" id="otroProcedimiento" class="form-control mt-2 hidden" placeholder="Especifique procedimiento">
           </div>
-          <div class="form-group col-md-6" id="otroProcedimiento">
-            <label>Especifique Procedimiento</label>
-            <input type="text" id="otroProcedimientoInput" class="form-control">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
+          <div class="col-md-6">
             <label>Tipo de Sedación</label>
-            <select id="tipoSedacion" class="form-control" required>
+            <select id="tipoSedacion" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Bloqueo</option>
               <option>General</option>
               <option>Sedación</option>
+              <option>Otro</option>
             </select>
+            <input type="text" id="otroTipoSedacion" class="form-control mt-2 hidden" placeholder="Especifique tipo de sedación">
           </div>
-          <div class="form-group col-md-4">
+          <div class="col-md-6">
             <label>Anestesiólogo</label>
-            <select id="anestesiologo" class="form-control" required>
+            <select id="anestesiologo" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Dr. Chávez</option>
               <option>Dr. Muñóz</option>
               <option>Dr. Leyva</option>
               <option>Dr. Rangel</option>
               <option>Otro</option>
             </select>
+            <input type="text" id="otroAnestesio" class="form-control mt-2 hidden" placeholder="Especifique anestesiólogo">
           </div>
-          <div class="form-group col-md-4" id="otroAnestesiologo">
-            <label>Especifique Anestesiólogo</label>
-            <input type="text" id="nombreAnestesologo" class="form-control">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="col-md-6">
             <label>Clínica</label>
-            <select id="clinica" class="form-control" required>
+            <select id="clinica" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Memorial</option>
               <option>Victoria</option>
               <option>Notre Dame</option>
               <option>Star Médica</option>
               <option>Otro</option>
             </select>
+            <input type="text" id="otraClinica" class="form-control mt-2 hidden" placeholder="Especifique clínica">
           </div>
-          <div class="form-group col-md-6" id="otroClinica">
-            <label>Especifique Clínica</label>
-            <input type="text" id="nombreClinica" class="form-control">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="col-md-6">
             <label>Quirúrgico</label>
-            <select id="cirujano" class="form-control" required>
+            <select id="cirujano" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Dr. Galindo</option>
               <option>Dr. García</option>
               <option>Dr. Ochoa</option>
@@ -131,226 +116,108 @@
               <option>Dra. Morales</option>
               <option>Otro</option>
             </select>
+            <input type="text" id="otroCirujano" class="form-control mt-2 hidden" placeholder="Especifique quirúrgico">
           </div>
-          <div class="form-group col-md-6" id="otroCirujano">
-            <label>Especifique Quirúrgico</label>
-            <input type="text" id="nombreCirujano" class="form-control">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
+          <div class="col-md-6">
             <label>¿Pago Realizado?</label>
-            <select id="pagoRealizado" class="form-control" required>
+            <select id="pagoRealizado" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Pagado</option>
               <option>Pendiente de Pago</option>
             </select>
           </div>
-          <div class="form-group col-md-4">
+          <div class="col-md-6">
             <label>Forma de Pago</label>
-            <select id="formaPago" class="form-control">
+            <select id="formaPago" class="form-select" required>
+              <option selected disabled value="">Seleccione</option>
               <option>Efectivo</option>
               <option>Transferencia</option>
               <option>Cheque</option>
               <option>Pendiente de Pago</option>
             </select>
           </div>
-          <div class="form-group col-md-4">
-            <label>Cantidad</label>
-            <input type="number" id="cantidad" class="form-control" required>
+          <div class="col-md-6">
+            <label>Cantidad (MXN)</label>
+            <input type="number" id="cantidad" class="form-control" placeholder="$0.00" required>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="col-md-6">
             <label>Fecha de Pago</label>
             <input type="date" id="fechaPago" class="form-control">
           </div>
-          <div class="form-group col-md-6">
+          <div class="col-12">
             <label>Observaciones</label>
             <textarea id="observaciones" class="form-control" rows="2"></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-success btn-block">
-          <i class="fas fa-save"></i> Registrar
-        </button>
+        <div class="text-end mt-4">
+          <button type="submit" class="btn btn-success px-4">
+            <i class="fas fa-save me-2"></i>Registrar Paciente
+          </button>
+        </div>
       </form>
     </div>
   </div>
+  <!-- Aquí va el dashboard (gráficos + tabla) -->
+  <!-- Y debajo, el script JavaScript actualizado -->
+</div>
 
-  <!-- DASHBOARD -->
-  <div class="card">
-    <div class="card-header text-center">Dashboard de Pacientes</div>
-    <div class="card-body">
-      <div class="form-row align-items-end">
-        <div class="form-group col-md-4">
-          <label>Filtrar por Anestesiólogo</label>
-          <select id="anestesiologoFiltro" class="form-control">
-            <option value="">— Todos —</option>
-            <option>Dr. Chávez</option>
-            <option>Dr. Muñóz</option>
-            <option>Dr. Leyva</option>
-            <option>Dr. Rangel</option>
-          </select>
-        </div>
-        <div class="form-group col-md-4">
-          <button id="btnExcel" class="btn btn-primary btn-block">
-            <i class="fas fa-file-excel"></i> Descargar Excel
-          </button>
-        </div>
-        <div class="form-group col-md-4">
-          <button id="btnPDF" class="btn btn-danger btn-block">
-            <i class="fas fa-file-pdf"></i> Exportar PDF
-          </button>
-        </div>
+<!-- Dashboard -->
+<div class="card">
+  <div class="card-header text-center">
+    <h5>Dashboard de Seguimiento</h5>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="filtroAnestesiologo">Filtrar por Anestesiólogo</label>
+        <select id="filtroAnestesiologo" class="form-select">
+          <option value="Todos">Todos</option>
+          <option>Dr. Chávez</option>
+          <option>Dr. Muñóz</option>
+          <option>Dr. Leyva</option>
+          <option>Dr. Rangel</option>
+        </select>
       </div>
-      <canvas id="graficoPacientes" height="120"></canvas>
-      <table class="table table-striped mt-3">
-        <thead class="thead-light">
+      <div class="col-md-6 d-flex align-items-end">
+        <button id="btnExportarPDF" class="btn btn-danger ms-auto">
+          <i class="fas fa-file-pdf me-2"></i> Exportar PDF
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="graficoEstadoPago"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="graficoIngresos"></canvas>
+      </div>
+    </div>
+    <div class="table-responsive mt-4">
+      <table class="table table-bordered table-striped">
+        <thead class="table-light">
           <tr>
-            <th>Folio</th>
             <th>Fecha</th>
             <th>Paciente</th>
             <th>Procedimiento</th>
             <th>Monto</th>
+            <th>Anestesiólogo</th>
           </tr>
         </thead>
-        <tbody id="tablaPacientes"></tbody>
+        <tbody id="tablaDashboard"></tbody>
       </table>
     </div>
   </div>
-
 </div>
 
-<!-- Librerías externas -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Librerías necesarias -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-
 <script>
-(() => {
-  const patients = [];
-  const chartCtx = document.getElementById('graficoPacientes').getContext('2d');
-  const chart = new Chart(chartCtx, {
-    type: 'bar',
-    data: {
-      labels: ['Pagado','Pendiente de Pago'],
-      datasets:[{ label:'Pacientes', data:[0,0], backgroundColor:['#28a745','#dc3545'] }]
-    },
-    options:{ responsive:true, maintainAspectRatio:false }
-  });
-
-  function initFormHeader() {
-    document.getElementById('fecha').value = new Date().toLocaleDateString();
-    document.getElementById('folio').value = `F-${Date.now()}`;
-  }
-  initFormHeader();
-
-  const mapOtros = [
-    ['procedimiento','otroProcedimiento'],
-    ['anestesiologo','otroAnestesiologo'],
-    ['clinica','otroClinica'],
-    ['cirujano','otroCirujano']
-  ];
-  mapOtros.forEach(([sel, cont]) => {
-    document.getElementById(sel).addEventListener('change', e => {
-      document.getElementById(cont).style.display = e.target.value==='Otro'? 'block':'none';
-    });
-  });
-
-  document.getElementById('pagoRealizado').addEventListener('change', e => {
-    const esPend = e.target.value==='Pendiente de Pago';
-    const fp = document.getElementById('formaPago');
-    fp.value = esPend? 'Pendiente de Pago': fp.value;
-    fp.disabled = esPend;
-    document.getElementById('fechaPago').disabled = esPend;
-  });
-
-  function updateDashboard() {
-    const filtro = document.getElementById('anestesiologoFiltro').value;
-    const list = filtro? patients.filter(p => p.anestesiologo===filtro) : patients;
-    const tbody = document.getElementById('tablaPacientes');
-    tbody.innerHTML = '';
-    list.forEach(p => {
-      tbody.insertAdjacentHTML('beforeend', `
-        <tr>
-          <td>${p.folio}</td>
-          <td>${p.fecha}</td>
-          <td>${p.nombrePaciente}</td>
-          <td>${p.procedimiento}</td>
-          <td>${p.cantidad}</td>
-        </tr>`);
-    });
-    const pag = list.filter(p=>p.pagoRealizado==='Pagado').length;
-    const pen = list.filter(p=>p.pagoRealizado==='Pendiente de Pago').length;
-    chart.data.datasets[0].data = [pag,pen];
-    chart.update();
-  }
-  document.getElementById('anestesiologoFiltro').addEventListener('change', updateDashboard);
-
-  document.getElementById('btnExcel').addEventListener('click', () => {
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(patients);
-    XLSX.utils.book_append_sheet(wb, ws, 'Pacientes');
-    const wbout = XLSX.write(wb,{bookType:'xlsx',type:'array'});
-    saveAs(new Blob([wbout],{type:"application/octet-stream"}),"pacientes.xlsx");
-  });
-
-  document.getElementById('btnPDF').addEventListener('click', () => {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    const folioPDF = `F-${Date.now()}`;
-    doc.setFontSize(16).text("Dra. Karla Soto",14,20);
-    doc.setFontSize(10).text(`Cotización – Folio ${folioPDF}`,14,28);
-    doc.autoTable({
-      startY: 35,
-      head:[["Folio","Fecha","Paciente","Procedimiento","Monto"]],
-      body: patients.map(p=>[p.folio,p.fecha,p.nombrePaciente,p.procedimiento,p.cantidad]),
-      theme:'striped'
-    });
-    doc.save(`cotizacion_${folioPDF}.pdf`);
-  });
-
-  async function sendToGoogleSheets(data) {
-    try {
-      await fetch('https://script.google.com/macros/s/AKfycbzOIZaXsWPkBqu1_Gu42T6x0MmyHa2jmH5wLgfUL_3n1VUfSoBopsP9FCd7b7XozdBP_Q/exec', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(data)
-      });
-    } catch(err) { console.error(err); }
-  }
-
-  document.getElementById('patientForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const f = id => document.getElementById(id).value;
-    const registro = {
-      fecha: f('fecha'),
-      folio: f('folio'),
-      nombrePaciente: f('nombrePaciente'),
-      procedimiento: document.getElementById('procedimiento').value==='Otro'? f('otroProcedimientoInput') : document.getElementById('procedimiento').value,
-      tipoSedacion: f('tipoSedacion'),
-      anestesiologo: document.getElementById('anestesiologo').value==='Otro'? f('nombreAnestesologo') : document.getElementById('anestesiologo').value,
-      clinica: document.getElementById('clinica').value==='Otro'? f('nombreClinica') : document.getElementById('clinica').value,
-      cirujano: document.getElementById('cirujano').value==='Otro'? f('nombreCirujano') : document.getElementById('cirujano').value,
-      pagoRealizado: f('pagoRealizado'),
-      formaPago: f('formaPago'),
-      cantidad: f('cantidad'),
-      fechaPago: f('fechaPago'),
-      observaciones: f('observaciones')
-    };
-    patients.push(registro);
-    updateDashboard();
-    sendToGoogleSheets(registro);
-    initFormHeader();
-    document.getElementById('patientForm').reset();
-    alert('Paciente registrado correctamente');
-  });
-
-})();
+// Aquí irá el script JavaScript que ya corregimos e integraremos completo en el siguiente paso
 </script>
-
 </body>
 </html>
